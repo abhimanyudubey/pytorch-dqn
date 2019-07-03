@@ -51,6 +51,6 @@ if __name__ == '__main__':
 
     # Run training
     seed = 0 # Use a seed of zero (you may want to randomize the seed!)
-    env = get_env('CartPole-v0', seed)
+    env = get_env('Breakout-v0', seed)
 
     main(env, 1e6)
