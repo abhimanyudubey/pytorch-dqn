@@ -46,15 +46,11 @@ def main(env, num_timesteps):
         target_update_freq=TARGER_UPDATE_FREQ,
     )
 
-if __name__ == '__main__':
-    # Get Atari games.
-    benchmark = gym.benchmark_spec('Atari40M')
 
-    # Change the index to select a different game.
-    task = benchmark.tasks[3]
+if __name__ == '__main__':
 
     # Run training
     seed = 0 # Use a seed of zero (you may want to randomize the seed!)
-    env = get_env(task, seed)
+    env = get_env('CartPole-v0', seed)
 
-    main(env, task.max_timesteps)
+    main(env, 1e6)
