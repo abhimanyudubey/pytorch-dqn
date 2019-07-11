@@ -135,7 +135,7 @@ class ClippedRewardsWrapper(gym.Wrapper):
 def wrap_deepmind_ram(env):
     env = EpisodicLifeEnv(env)
     env = NoopResetEnv(env, noop_max=30)
-    env = MaxAndSkipEnv(env, skip=4)
+    # env = MaxAndSkipEnv(env, skip=4)
     if 'FIRE' in env.unwrapped.get_action_meanings():
         env = FireResetEnv(env)
     env = ClippedRewardsWrapper(env)
