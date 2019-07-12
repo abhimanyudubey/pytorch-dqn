@@ -106,7 +106,7 @@ def dqn_learing(
         input_arg = env.observation_space.shape[0]
     else:
         img_h, img_w, img_c = env.observation_space.shape
-        input_arg = frame_history_len * img_c
+        input_arg = frame_history_len * img_c * 3
     num_actions = env.action_space.n
 
     # Construct an epilson greedy policy with given exploration schedule
@@ -145,7 +145,6 @@ def dqn_learing(
 
         ### Step the env and store the transition
         # Store lastest observation in replay memory and last_idx can be used to store action, reward, done
-        print(last_obs.shape, type(last_obs))
         last_idx = replay_buffer.store_frame(last_obs)
         # encode_recent_observation will take the latest observation
         # that you pushed into the buffer and compute the corresponding
