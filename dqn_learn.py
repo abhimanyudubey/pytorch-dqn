@@ -145,13 +145,13 @@ def dqn_learing(
 
         ### Step the env and store the transition
         # Store lastest observation in replay memory and last_idx can be used to store action, reward, done
+        print(last_obs.shape, type(last_obs))
         last_idx = replay_buffer.store_frame(last_obs)
         # encode_recent_observation will take the latest observation
         # that you pushed into the buffer and compute the corresponding
         # input that should be given to a Q network by appending some
         # previous frames.
         recent_observations = replay_buffer.encode_recent_observation()
-        print(recent_observations.shape, type(recent_observations))
 
         # Choose random action if not yet start learning
         if t > learning_starts:
