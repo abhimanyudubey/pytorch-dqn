@@ -16,6 +16,7 @@ import torch.autograd as autograd
 
 from utils.replay_buffer import ReplayBuffer
 from utils.gym import get_wrapper_by_name
+from utils.atari_wrapper import _process_frame84
 
 USE_CUDA = torch.cuda.is_available()
 dtype = torch.cuda.FloatTensor if torch.cuda.is_available() else torch.FloatTensor
@@ -106,7 +107,7 @@ def dqn_learing(
         input_arg = env.observation_space.shape[0]
     else:
         img_h, img_w, img_c = env.observation_space.shape
-        input_arg = frame_history_len * img_c * 3
+        input_arg = frame_history_len * img_c
     num_actions = env.action_space.n
 
     # Construct an epilson greedy policy with given exploration schedule
@@ -135,7 +136,7 @@ def dqn_learing(
     num_param_updates = 0
     mean_episode_reward = -float('nan')
     best_mean_episode_reward = -float('inf')
-    last_obs = env.reset()
+    last_obs = _process_frame84(env.reset())
     LOG_EVERY_N_STEPS = 10000
 
     for t in count():
