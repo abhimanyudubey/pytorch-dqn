@@ -151,7 +151,7 @@ def dqn_learing(
         # input that should be given to a Q network by appending some
         # previous frames.
         recent_observations = replay_buffer.encode_recent_observation()
-        print(recent_observations.size())
+        print(recent_observations.shape, type(recent_observations))
 
         # Choose random action if not yet start learning
         if t > learning_starts:
