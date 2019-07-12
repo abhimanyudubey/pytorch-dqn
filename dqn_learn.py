@@ -160,13 +160,14 @@ def dqn_learing(
             action = random.randrange(num_actions)
         # Advance one step
         obs, reward, done, _ = env.step(action)
+        obs = _process_frame84(obs)
         # clip rewards between -1 and 1
         reward = max(-1.0, min(reward, 1.0))
         # Store other info in replay memory
         replay_buffer.store_effect(last_idx, action, reward, done)
         # Resets the environment when reaching an episode boundary.
         if done:
-            obs = env.reset()
+            obs = _process_frame84(env.reset())
         last_obs = obs
 
         ### Perform experience replay and train the network.
